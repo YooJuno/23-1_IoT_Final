@@ -1,6 +1,6 @@
 # 온라인 합주 프로그램
 
-**기본 개념**
+### **기본 개념**
 
 * Protocol : "VoIP(Voice Over Internet Protocol)
 * 여기서도 RTP개념은 사용해야함. 이유는 VoIP또한 패킷의 순서보장을 하지 못하기 때문.
