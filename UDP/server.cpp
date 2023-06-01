@@ -9,7 +9,7 @@ using namespace cv;
 
 int main() {
     const char* UDP_IP = "127.0.0.1";
-    const int UDP_PORT = 9505;
+    const int UDP_PORT = 5004;
     int sock = socket(AF_INET, SOCK_DGRAM, 0);
 
     sockaddr_in server_addr;
