@@ -8,14 +8,13 @@ using namespace std;
 using namespace cv;
 
 
-// 게임 화면 크기 및 초기 팩맨 위치 설정
-const int screenWidth = 1000;
-const int screenHeight = 1000;
+// 게임 화면 크기
+const int size = 1000;
 
 
 
 int main(){
-    Packman packman(screenWidth, screenHeight);
+    Packman packman(size);
 
     while (true)
     {

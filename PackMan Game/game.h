@@ -10,37 +10,37 @@ using namespace cv;
 
 class Packman{
     public:
-        Packman(int size_width, int size_height)
-        : width(size_width), height(size_height)
+        Packman(int size)
+        : size(size)
         {
             set_array();
-            game_map = Mat(height, width, CV_8UC3, Scalar(255, 0, 0));
-            pose_x = width/2;
-            pose_y = height/2;
+            game_map = Mat(size, size, CV_8UC3, Scalar(255, 0, 0));
+            pose_x = size/2;
+            pose_y = size/2;
             direction_x=0;
             direction_y=0;
             offset = 2;
             angle_mouse=0;
-            radius = min(width/(GRID_NUM*2)/2, height/(GRID_NUM*2)/2);
+            radius = min(size/(GRID_NUM*2)/2, size/(GRID_NUM*2)/2);
             point=0;
             draw_background();
 
         }
 
         void draw_background(){
-            game_map = Mat(height, width, CV_8UC3, Scalar(255, 0, 0));
+            game_map = Mat(size, size, CV_8UC3, Scalar(255, 0, 0));
             for(int i=0 ; i<GRID_NUM ; i++){
                 for(int j=0 ; j<GRID_NUM ; j++){
                     if(map_array[i][j]){
                         rectangle(  game_map , 
-                                    Rect(i*(width/GRID_NUM), j*(height/GRID_NUM), width/GRID_NUM,height/GRID_NUM) , 
+                                    Rect(i*(size/GRID_NUM), j*(size/GRID_NUM), size/GRID_NUM,size/GRID_NUM) , 
                                     Scalar(0, 0, 0) ,
                                     FILLED
                                 );
                     }
                     
                     if(dot_array[i][j])
-                        circle(game_map, Point(i*(width/GRID_NUM) + (width/GRID_NUM)/2, j*(height/GRID_NUM)+(height/GRID_NUM)/2), 5, Scalar(255, 0, 255), 1, 8, 0);
+                        circle(game_map, Point(i*(size/GRID_NUM) + (size/GRID_NUM)/2, j*(size/GRID_NUM)+(size/GRID_NUM)/2), 5, Scalar(255, 0, 255), 1, 8, 0);
 
                     
                 }
@@ -86,7 +86,7 @@ class Packman{
         bool is_inbound(int cur_x, int cur_y){
             bool return_val=true;
 
-            return map_array[cur_x/(width/GRID_NUM)][cur_y/(height/GRID_NUM)];
+            return map_array[cur_x/(size/GRID_NUM)][cur_y/(size/GRID_NUM)];
         }
 
         bool get_map_array(int j, int i){
@@ -131,8 +131,8 @@ class Packman{
             for(int i=0 ; i<GRID_NUM ; i++){
                 for(int j=0 ; j<GRID_NUM ; j++){
                     if(dot_array[i][j]){
-                        if(pose_x>=i*(width/GRID_NUM) && pose_x<(i+1)*(width/GRID_NUM)){
-                            if(pose_y>=j*(width/GRID_NUM) && pose_y<(j+1)*(width/GRID_NUM)){
+                        if(pose_x>=i*(size/GRID_NUM) && pose_x<(i+1)*(size/GRID_NUM)){
+                            if(pose_y>=j*(size/GRID_NUM) && pose_y<(j+1)*(size/GRID_NUM)){
                                 dot_array[i][j] = 0;
                                 point += 1;
                                 cout<<"point : "<< point <<endl;
@@ -182,8 +182,7 @@ class Packman{
 
 
     private:
-        int width;
-        int height;
+        int size;
         bool map_array[GRID_NUM+1][GRID_NUM+1];
         bool dot_array[GRID_NUM+1][GRID_NUM+1];
         Mat game_map;
