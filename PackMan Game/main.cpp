@@ -14,25 +14,8 @@ const int screenHeight = 1000;
 
 
 
-
-
-
-
 int main(){
-    Packman packman(1000, 1000);
-
-    
-    Point PacmanPosition(screenWidth / 2, screenHeight / 2);
-
-    // 입의 초기 각도 및 방향 설정
-
-
-
-
-
-
-
-
+    Packman packman(screenWidth, screenHeight);
 
     while (true)
     {
@@ -45,19 +28,11 @@ int main(){
 
         packman.update_direction(key);
         packman.update_pose();
-        
-
         packman.draw_background();
-
-
         packman.draw_packman();
-
         packman.show();
         
     }
-
-    waitKey(0);
-
     return 0;
 }
 
