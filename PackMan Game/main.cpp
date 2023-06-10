@@ -32,9 +32,9 @@ int main(){
         imshow("Pacman Game", background.game_map);
 
         pacman1.update_direction(key);
-        pacman2.update_direction(81);
-        pacman3.update_direction(82);
-        pacman4.update_direction(83);
+        pacman2.update_direction(key);
+        pacman3.update_direction(key);
+        pacman4.update_direction(key);
 
         pacman1.update_pose();
         pacman2.update_pose();

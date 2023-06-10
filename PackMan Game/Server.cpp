@@ -1,4 +1,4 @@
-//g++ -std=c++11 Server.cpp -o Server -lboost_system -pthread
+// g++ -std=c++11 Server.cpp -o Server -lboost_system -pthread
 #include <boost/asio.hpp>
 #include <iostream>
 #include <vector>
@@ -46,7 +46,7 @@ private:
 		        std::cerr << "Error reading from client: " << ec.message() << std::endl;
 		    } else {
 		    
-			if (clients_.size() == 3 && first_try == false) {
+			if (clients_.size() == 4 && first_try == false) {
 		            additionalAction();
 		            loadingbroadcast("Play");
 		            first_try = true;
@@ -60,12 +60,12 @@ private:
 		        std::string token;
 		        
 		        while (std::getline(ss, token, ':')) {
-                            tokens.push_back(token);
-                        }
+                    tokens.push_back(token);
+                }
                         
-                        if (tokens.size() >= 2) {
-		            name = tokens[0];
-		            key = tokens[1];
+                if (tokens.size() >= 2) {
+                name = tokens[0];
+                key = tokens[1];
 		            
 		            if(name == "username")
 		            	userlist.push_back(tokens[1]);
@@ -76,12 +76,12 @@ private:
 		        }
 		        
 		        for(int i = 0 ; i < userlist.size() ; i++){
-		            	if(userlist[i] == tokens[0]) {
-		            		numbering = i;
-		            		std::cout << userlist[i] << std::endl;
-		            		break;
-		            	}		
-		            }
+                    if(userlist[i] == tokens[0]) {
+                        numbering = i;
+                        std::cout << userlist[i] << std::endl;
+                        break;
+                    }		
+                }
 		      
 		      	std::stringstream dd;
 		      	dd << numbering;

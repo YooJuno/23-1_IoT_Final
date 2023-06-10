@@ -1,4 +1,4 @@
-//g++ -std=c++11 Client.cpp -o Client -lboost_system -pthread $(pkg-config --libs --cflags opencv4)
+// g++ -std=c++11 Client.cpp -o Client -lboost_system -pthread $(pkg-config --libs --cflags opencv4)
 #include <boost/asio.hpp>
 #include <iostream>
 #include <thread>
@@ -74,13 +74,13 @@ private:
                                             int usernumber = std::stoi(temp1);
                                             int direction = std::stoi(temp2);
 
-					    if(usernumber == 9) {
+					    if(usernumber == 0) {
 					    	key1 = direction;
-					    } else if(usernumber == 0) {
-					    	key2 = direction;
 					    } else if(usernumber == 1) {
-					    	key3 = direction;
+					    	key2 = direction;
 					    } else if(usernumber == 2) {
+					    	key3 = direction;
+					    } else if(usernumber == 3) {
 					    	key4 = direction;
 					    }
                                         }
@@ -109,13 +109,14 @@ private:
     	
     	boost::asio::write(socket_, boost::asio::buffer(Entername));
     	
-	const int size = 500; 
-	
-	Background background(size);
+        const int size = 500; 
+        
+        Background background(size);
+
     	Pacman pacman1(size, background, 0);
     	Pacman pacman2(size, background, 1);
-   	Pacman pacman3(size, background, 2);
-   	Pacman pacman4(size, background, 3);
+        Pacman pacman3(size, background, 2);
+        Pacman pacman4(size, background, 3);
 
     	namedWindow("Pacman Game", WINDOW_NORMAL);
     	resizeWindow("Pacman Game", size, size);
@@ -124,7 +125,7 @@ private:
             std::stringstream ss;
             std::string waitingMessage;
             
-            int key = waitKey(5);
+            int key = waitKey(40);
             if (key == 27) {
                 break;
             }
@@ -139,23 +140,45 @@ private:
             }
 
 	    if(game_state == true) {
-	    	    pacman1.update_direction(key1);
-	    	    pacman2.update_direction(key2);
-	    	    pacman3.update_direction(key3);
-	    	    pacman4.update_direction(key4);
-
-		    //pacman1.update_pose();
-		    pacman2.update_pose();
-		    pacman3.update_pose();
-		    pacman4.update_pose();
-		    
 		    background.draw_background();
+
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+
+            // cout<<"key1("<< key1;
+            // cout<<")  key2("<< key2;
+            // cout<<")  key3("<< key3;
+            // cout<<")key4("<< key4<<")"<<endl<<endl;
+
+            pacman1.update_direction(key1);
+		    pacman1.update_pose();
+            
+            pacman2.update_direction(key2);
+		    pacman2.update_pose();
+            
+            pacman3.update_direction(key3);
+		    pacman3.update_pose();
+            
+            pacman4.update_direction(key4);
+		    pacman4.update_pose();
+            
+
 		    
-		    //pacman1.draw_packman();
+		    
+		    pacman1.draw_packman();
 		    pacman2.draw_packman();
 		    pacman3.draw_packman();
 		    pacman4.draw_packman();
 		    imshow("Pacman Game", background.game_map);
+
+            // for(int i=0 ; i<GRID_NUM; i++){
+            //     for(int j=0 ; j<GRID_NUM ; j++){
+            //         cout<<background.dot_array[j][i]<<" ";
+
+            //     }
+            //     cout<<endl;
+            // }
+            
 	    	    
     	    
             }
@@ -172,10 +195,10 @@ private:
     std::string inputBuffer_;
     std::string name;
     bool game_state = false;
-    int key1 = 1;
-    int key2 = 1;
-    int key3 = 1;
-    int key4 = 1;
+    int key1 = -99;
+    int key2 = -99;
+    int key3 = -99;
+    int key4 = -99;
 };
 
 int main() {

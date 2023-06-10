@@ -70,15 +70,16 @@ private:
 class Pacman {
 public:
     Pacman(int size, Background& background, int id)
-        : size(size), background(background), id(id)
-    {
-        pose_x = size / 2;
-        pose_y = size / 2;
+        : _size(size), background(background), id(id)
+    {   
+        cout<<"\n\n\n\n\n\n\nsize : "<<_size<<endl<<endl<<endl;
+        pose_x = _size / 2;
+        pose_y = _size / 2;
         direction_x = 0;
         direction_y = 0;
         offset = 1;
         angle_mouse = 0;
-        radius = min(size / (GRID_NUM * 2) / 2, size / (GRID_NUM * 2) / 2);
+        radius = min(_size / (GRID_NUM * 2) / 2, _size / (GRID_NUM * 2) / 2);
         point = 0;
     }
 
@@ -126,17 +127,23 @@ public:
                 background.is_inbound(pose_x + offset + radius, pose_y + radius))
                 pose_x += offset;
         }
+        if(id==0)
+            cout<<"pose_x-"<<pose_x<<"  pose_y-"<<pose_y<<"  size-"<<_size<<endl;
 
         for (int i = 0; i < GRID_NUM; i++) {
             for (int j = 0; j < GRID_NUM; j++) {
+                    if (pose_x >= i * (500 / GRID_NUM) && pose_x < (i + 1) * (500 / GRID_NUM)) {
+                        if (pose_y >= j * (500 / GRID_NUM) && pose_y < (j + 1) * (500 / GRID_NUM)) {
                 if (background.dot_array[i][j]) {
-                    if (pose_x >= i * (size / GRID_NUM) && pose_x < (i + 1) * (size / GRID_NUM)) {
-                        if (pose_y >= j * (size / GRID_NUM) && pose_y < (j + 1) * (size / GRID_NUM)) {
-                            background.dot_array[i][j] = 0;
                             point += 1;
-                            cout << "Pacman " << id << " point : " << point << endl;
+                            // cout << "\n\nPacman " << id << " point : " << point << endl<<endl;
+
+                            cout<<"\n\npose_x-"<<pose_x<<"  pose_y-"<<pose_y<<endl<<endl;
+                            background.dot_array[i][j] = 0;
                         }
                     }
+
+                    
                 }
             }
         }
@@ -183,7 +190,7 @@ public:
     }
 
 private:
-    int size;
+    int _size;
     int pose_x;
     int pose_y;
     int direction_x;
