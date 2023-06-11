@@ -14,14 +14,14 @@ public:
         : _size(size)
     {
         set_array();
-        game_map = Mat(size, size, CV_8UC3, Scalar(255, 0, 0));
+        game_map = Mat(size, size, CV_8UC3, Scalar(255, 153, 103));
         putText(game_map, "Wait For the User...", Point(10, 30), FONT_HERSHEY_SIMPLEX, 3, Scalar(255, 255, 255), 2);
         draw_background();
     }
 
     void draw_background()
     {
-        game_map = Mat(_size, _size, CV_8UC3, Scalar(255, 0, 0));
+        game_map = Mat(_size, _size, CV_8UC3, Scalar(100, 100, 0));
         for (int i = 0; i < GRID_NUM; i++)
         {
             for (int j = 0; j < GRID_NUM; j++)
@@ -35,7 +35,7 @@ public:
                 }
 
                 if (dot_array[i][j])
-                    circle(game_map, Point(j * (_size / GRID_NUM) + (_size / GRID_NUM) / 2, i * (_size / GRID_NUM) + (_size / GRID_NUM) / 2), 5, Scalar(255, 0, 255), 1, 8, 0);
+                    circle(game_map, Point(j * (_size / GRID_NUM) + (_size / GRID_NUM) / 2, i * (_size / GRID_NUM) + (_size / GRID_NUM) / 2), 5, Scalar(97, 150, 242), 1, 8, 0);
             }
         }
     }
@@ -100,13 +100,27 @@ public:
     Pacman(int size, Background &background, int id)
         : _size(size), background(background), id(id)
     {
-        pose_x = _size / 2;
-        pose_y = _size / 2;
+        radius = min(_size / (GRID_NUM * 2), _size / (GRID_NUM * 2) );
+        if(id==0){
+            pose_x = radius;
+            pose_y = radius;
+        }
+        else if(id==1){
+            pose_x = radius;
+            pose_y = _size-radius;
+        }
+        else if(id==2){
+            pose_x = _size-radius;
+            pose_y = radius;
+        }
+        else if(id==3){
+            pose_x = _size-radius;
+            pose_y = _size-radius;
+        }
         direction_x = 0;
         direction_y = 0;
-        offset = 1;
+        offset = 2;
         angle_mouse = 0;
-        radius = min(_size / (GRID_NUM * 2) / 2, _size / (GRID_NUM * 2) / 2);
         point = 0;
     }
 
