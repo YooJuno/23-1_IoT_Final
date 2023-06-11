@@ -30,7 +30,8 @@ public:
             t.detach();
 
             handleUserInput();
-        } catch (const std::exception& ex) {
+        } 
+        catch (const std::exception& ex) {
             std::cerr << "Exception: " << ex.what() << std::endl;
         }
     }
@@ -38,7 +39,6 @@ public:
 private:
     void connect(ip::tcp::resolver::iterator endpointIterator) {
         boost::asio::connect(socket_, endpointIterator);
-        
         startReading();
     }
 
@@ -46,51 +46,50 @@ private:
     void startReading() {
         std::array<char, 2048> buffer;
 
-        socket_.async_read_some(boost::asio::buffer(buffer),
-                                [this, &buffer](boost::system::error_code ec, std::size_t bytesRead) {
-                                    if (!ec) {
-                                        std::string message(buffer.data(), bytesRead);
-                                        message.erase(std::remove(message.begin(), message.end(), '\n'), message.end());
-                                        std::cout << ">> Received message: " << message << std::endl;
-                                        
-                                        if(message == "Play")
-                                        	game_state = true;
-                                        
-                                        std::vector<std::string> tokens;
-                                        std::stringstream ss(message);
-                                        std::string token;
+        socket_.async_read_some(
+            boost::asio::buffer(buffer),
+            [this, &buffer](boost::system::error_code ec, std::size_t bytesRead) {
+                if (!ec) {
+                    std::string message(buffer.data(), bytesRead);
+                    message.erase(std::remove(message.begin(), message.end(), '\n'), message.end());
+                    
+                    if(message == "Play")
+                        game_state = true;
+                    
+                    std::vector<std::string> tokens;
+                    std::stringstream ss(message);
+                    std::string token;
 
-                                        while (std::getline(ss, token, ':')) {
-                                            tokens.push_back(token);
-                                        }
-                                        
-                                        if (tokens.size() >= 2) {
-                                            string temp1 = tokens[0];
-                                            string temp2 = tokens[1];
-                                            
-                                            std::cout << "[" << temp1 << "]" << std::endl;
-                                            std::cout << "[" << temp2 << "]" << std::endl;
-                                            
-                                            int usernumber = std::stoi(temp1);
-                                            int direction = std::stoi(temp2);
+                    while (std::getline(ss, token, ':')) 
+                        tokens.push_back(token);
+                    
+                    
+                    if (tokens.size() >= 2) {
+                        string temp1 = tokens[0];
+                        string temp2 = tokens[1];
+                        
+                        int usernumber = std::stoi(temp1);
+                        int direction = std::stoi(temp2);
 
-					    if(usernumber == 0) {
-					    	key1 = direction;
-					    } else if(usernumber == 1) {
-					    	key2 = direction;
-					    } else if(usernumber == 2) {
-					    	key3 = direction;
-					    } else if(usernumber == 3) {
-					    	key4 = direction;
-					    }
-                                        }
+                        if(usernumber == 0) {
+                            key1 = direction;
+                        } else if(usernumber == 1) {
+                            key2 = direction;
+                        } else if(usernumber == 2) {
+                            key3 = direction;
+                        } else if(usernumber == 3) {
+                            key4 = direction;
+                        }
+                    }
 
-                                        startReading();
-                                    } else {
-                                        std::cerr << "Error reading from server: " << ec.message() << std::endl;
-                                        socket_.close();
-                                    }
-                                });
+                    startReading();
+                } 
+                else {
+                    std::cerr << "Error reading from server: " << ec.message() << std::endl;
+                    socket_.close();
+                }
+            }
+        );
     }
 
 
@@ -125,7 +124,7 @@ private:
             std::stringstream ss;
             std::string waitingMessage;
             
-            int key = waitKey(40);
+            int key = waitKey(5);
             if (key == 27) {
                 break;
             }
@@ -145,42 +144,22 @@ private:
 
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
 
-            // cout<<"key1("<< key1;
-            // cout<<")  key2("<< key2;
-            // cout<<")  key3("<< key3;
-            // cout<<")key4("<< key4<<")"<<endl<<endl;
-
             pacman1.update_direction(key1);
-		    pacman1.update_pose();
-            
             pacman2.update_direction(key2);
-		    pacman2.update_pose();
-            
             pacman3.update_direction(key3);
-		    pacman3.update_pose();
-            
             pacman4.update_direction(key4);
-		    pacman4.update_pose();
-            
+        
+		    pacman1.update_pose(size);
+		    pacman2.update_pose(size);
+		    pacman3.update_pose(size);
+		    pacman4.update_pose(size);
 
-		    
-		    
 		    pacman1.draw_packman();
 		    pacman2.draw_packman();
 		    pacman3.draw_packman();
 		    pacman4.draw_packman();
 		    imshow("Pacman Game", background.game_map);
-
-            // for(int i=0 ; i<GRID_NUM; i++){
-            //     for(int j=0 ; j<GRID_NUM ; j++){
-            //         cout<<background.dot_array[j][i]<<" ";
-
-            //     }
-            //     cout<<endl;
-            // }
-            
-	    	    
-    	    
+	    	
             }
         }
         
@@ -205,7 +184,7 @@ int main() {
     try {
         boost::asio::io_context ioContext;
         std::string serverIP = "127.0.0.1";  // 서버 IP를 수정해야 합니다.
-        short serverPort = 2222;            // 서버 포트를 수정해야 합니다.
+        short serverPort = 2221;            // 서버 포트를 수정해야 합니다.
 
         Client client(ioContext, serverIP, serverPort);
         client.start();

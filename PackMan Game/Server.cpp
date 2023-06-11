@@ -37,66 +37,64 @@ private:
 	    std::shared_ptr<std::array<char, 2048>> buffer = std::make_shared<std::array<char, 2048>>();
 
 	    clientSocket->async_read_some(
-		boost::asio::buffer(*buffer),
-		[clientSocket, buffer,this](const boost::system::error_code& ec, size_t bytesRead) {
-		    if (ec == boost::asio::error::eof) {
-		        // Client disconnected
-		        handleDisconnect(clientSocket);
-		    } else if (ec) {
-		        std::cerr << "Error reading from client: " << ec.message() << std::endl;
-		    } else {
-		    
-			if (clients_.size() == 4 && first_try == false) {
-		            additionalAction();
-		            loadingbroadcast("Play");
-		            first_try = true;
-		        }
-		        // Process the received message
-		        std::string message(buffer->data(), bytesRead);
-		        
-		        
-		        std::vector<std::string> tokens;
-		        std::stringstream ss(message);
-		        std::string token;
-		        
-		        while (std::getline(ss, token, ':')) {
-                    tokens.push_back(token);
-                }
+            boost::asio::buffer(*buffer),
+            [clientSocket, buffer,this](const boost::system::error_code& ec, size_t bytesRead) {
+                if (ec == boost::asio::error::eof) {
+                    // Client disconnected
+                    handleDisconnect(clientSocket);
+                } else if (ec) {
+                    std::cerr << "Error reading from client: " << ec.message() << std::endl;
+                } else {
+                
+                if (clients_.size() == 4 && first_try == false) {
+                        additionalAction();
+                        loadingbroadcast("Play");
+                        first_try = true;
+                    }
+                    // Process the received message
+                    std::string message(buffer->data(), bytesRead);
+                    
+                    
+                    std::vector<std::string> tokens;
+                    std::stringstream ss(message);
+                    std::string token;
+                    
+                    while (std::getline(ss, token, ':')) {
+                        tokens.push_back(token);
+                    }
+                            
+                    if (tokens.size() >= 2) {
+                    name = tokens[0];
+                    key = tokens[1];
                         
-                if (tokens.size() >= 2) {
-                name = tokens[0];
-                key = tokens[1];
-		            
-		            if(name == "username")
-		            	userlist.push_back(tokens[1]);
-		            	
-		            std::cout << userlist.size() << std::endl;
-	
-		            std::cout << "[name]: [" << name << "]\n[key]: [" << key << "]" << std::endl;
-		        }
-		        
-		        for(int i = 0 ; i < userlist.size() ; i++){
-                    if(userlist[i] == tokens[0]) {
-                        numbering = i;
-                        std::cout << userlist[i] << std::endl;
-                        break;
-                    }		
-                }
-		      
-		      	std::stringstream dd;
-		      	dd << numbering;
-		      	dd << ":";
-		      	dd << key;
-		      	std::string result = dd.str();
-		      	
-		      	if(key == "81" || key == "82" || key == "83" || key == "84") {
-		      		broadcast(result, clientSocket);
-		      	}
+                        if(name == "username")
+                            userlist.push_back(tokens[1]);
+        
+                        std::cout << "[name]: [" << name << "]\n[key]: [" << key << "]" << std::endl;
+                    }
+                    
+                    for(int i = 0 ; i < userlist.size() ; i++){
+                        if(userlist[i] == tokens[0]) {
+                            numbering = i;
+                            break;
+                        }		
+                    }
+                
+                    std::stringstream dd;
+                    dd << numbering;
+                    dd << ":";
+                    dd << key;
+                    std::string result = dd.str();
+                    
+                    if(key == "81" || key == "82" || key == "83" || key == "84") {
+                        broadcast(result, clientSocket);
+                    }
 
-		        // Continue reading asynchronously
-		        startReading(clientSocket);
-		    }
-		});
+                    // Continue reading asynchronously
+                    startReading(clientSocket);
+                }
+            }
+        );
     }
 
     void additionalAction() {
@@ -143,7 +141,7 @@ private:
 int main() {
     try {
         boost::asio::io_service ioService;
-        Server server(ioService, 2222);
+        Server server(ioService, 2221);
 
         std::thread t([&ioService]() {
             ioService.run();
