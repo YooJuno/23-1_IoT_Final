@@ -49,3 +49,12 @@ https://yaaam.tistory.com/entry/Ubuntu-Boost-%EC%84%A4%EC%B9%98-Ubuntu-%ED%99%98
 
 ### Git Repository Clone
 
+$ git clone https://github.com/YooJuno/IoT_Final.git 
+
+### Server.cpp Compile
+
+$ g++ -std=c++11 Server.cpp -o Server -lboost_system -pthread  
+
+### Client.cpp Compile
+
+$ g++ -std=c++11 Client.cpp -o Client -lboost_system -pthread $(pkg-config --libs --cflags opencv4)  
