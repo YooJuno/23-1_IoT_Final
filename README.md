@@ -44,7 +44,6 @@ https://velog.io/@minukiki/Ubuntu-20.04%EC%97%90-OpenCV-4.4.0-%EC%84%A4%EC%B9%98
 https://yaaam.tistory.com/entry/Ubuntu-Boost-%EC%84%A4%EC%B9%98-Ubuntu-%ED%99%98%EA%B2%BD%EC%97%90%EC%84%9C-Boost-%EC%84%A4%EC%B9%98%EB%B0%A9%EB%B2%95
 
 
-
 # 사용 방법
 
 ### Git Repository Clone
@@ -58,3 +57,19 @@ $ g++ -std=c++11 Server.cpp -o Server -lboost_system -pthread
 ### Client.cpp Compile
 
 $ g++ -std=c++11 Client.cpp -o Client -lboost_system -pthread $(pkg-config --libs --cflags opencv4)  
+
+### Game 실행 방법
+
+##### ./Server <ip_address> <port> 순서대로 Command에 작성한다.  
+<img width="556" alt="KakaoTalk_20230614_204955234" src="https://github.com/YooJuno/IoT_Final/assets/82189642/e552e56b-32d8-4c8f-9a00-5edb3527e921">
+  
+##### ./Client <ip_address> <port> 순서대로 Command에 작성하여 Client 코드를 실행시킨다.  
+<img width="558" alt="KakaoTalk_20230614_205023248" src="https://github.com/YooJuno/IoT_Final/assets/82189642/e290e988-a84e-4ab5-9878-1fd367462a39">
+  
+##### Server 쪽에 사용자 정보가 다음처럼 등록된다.
+<img width="546" alt="KakaoTalk_20230614_205032602" src="https://github.com/YooJuno/IoT_Final/assets/82189642/7a1d92a4-5c59-44ee-bfad-11066db71955">
+
+<img width="562" alt="KakaoTalk_20230614_205133305" src="https://github.com/YooJuno/IoT_Final/assets/82189642/16acbcb8-872e-4c9b-a3d8-9d8731ba963d">
+  
+##### 4명의 Client가 접속하면 게임이 실행된다.
+<img width="378" alt="KakaoTalk_20230614_205204755" src="https://github.com/YooJuno/IoT_Final/assets/82189642/2f4f232c-69c3-4f36-93c2-bfd963854968">
