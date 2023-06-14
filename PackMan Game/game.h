@@ -15,7 +15,7 @@ public:
     {
         set_array();
         game_map = Mat(size, size, CV_8UC3, Scalar(255, 153, 103));
-        putText(game_map, "Wait For the User...", Point(10, 30), FONT_HERSHEY_SIMPLEX, 3, Scalar(255, 255, 255), 2);
+        putText(game_map, "Wait For the User...", Point(500/2, 500/2), FONT_HERSHEY_SIMPLEX, 8, Scalar(255, 255, 255), 2);
         draw_background();
     }
 
@@ -147,8 +147,8 @@ public:
 
         ellipse(background.game_map, Point(pose_x, pose_y), Size(radius, radius), 0, mouthAngle + angle_mouse, 360 - mouthAngle + angle_mouse, pacmanColor, -1);
         // Display score text
-        std::string scoreText = "Pacman " + std::to_string(id) + " Score: " + std::to_string(point);
-        putText(background.game_map, scoreText, Point(pose_x - 40, pose_y - 30), FONT_HERSHEY_SIMPLEX, 0.5, pacmanColor, 2);
+        std::string scoreText = "[" + std::to_string(id) + "] Score: " + std::to_string(point);
+        putText(background.game_map, scoreText, Point(pose_x - 40, pose_y - 30), FONT_HERSHEY_SIMPLEX, 0.5, pacmanColor, 1);
     }
 
     void update_pose(int map_size)

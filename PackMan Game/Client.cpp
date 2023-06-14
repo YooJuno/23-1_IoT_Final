@@ -117,53 +117,49 @@ private:
         Pacman pacman3(size, background, 2);
         Pacman pacman4(size, background, 3);
 
-    	namedWindow("Pacman Game", WINDOW_NORMAL);
-    	resizeWindow("Pacman Game", size, size);
+    	Mat black_screen;
+        black_screen = Mat(size, size, CV_8UC3, Scalar(0, 0, 0));
         
         while (true) {
             std::stringstream ss;
             std::string waitingMessage;
             
-            int key = waitKey(5);
+            int key = waitKey(15);
             if (key == 27) {
                 break;
             }
                 
-	    if(key == 81 || key == 82 || key == 83 || key == 84) {
-	    	ss << name;
-            	ss << ":";
-            	ss << key; 
-            	
-            	waitingMessage = ss.str();
-            	boost::asio::write(socket_, boost::asio::buffer(waitingMessage));
+	        if(key == 81 || key == 82 || key == 83 || key == 84) {
+                ss << name;
+                ss << ":";
+                ss << key; 
+                
+                waitingMessage = ss.str();
+                boost::asio::write(socket_, boost::asio::buffer(waitingMessage));
             }
 
-	    if(game_state == true) {
-		    background.draw_background();
+	        if(game_state == true) {
+                background.draw_background();
 
+                pacman1.update_direction(key1);
+                pacman2.update_direction(key2);
+                pacman3.update_direction(key3);
+                pacman4.update_direction(key4);
+            
+                pacman1.update_pose(size);
+                pacman2.update_pose(size);
+                pacman3.update_pose(size);
+                pacman4.update_pose(size);
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
-
-            pacman1.update_direction(key1);
-            pacman2.update_direction(key2);
-            pacman3.update_direction(key3);
-            pacman4.update_direction(key4);
-        
-		    pacman1.update_pose(size);
-		    pacman2.update_pose(size);
-		    pacman3.update_pose(size);
-		    pacman4.update_pose(size);
-
-		    pacman1.draw_packman();
-		    pacman2.draw_packman();
-		    pacman3.draw_packman();
-		    pacman4.draw_packman();
-		    imshow("Pacman Game", background.game_map);
-	    	
+                pacman1.draw_packman();
+                pacman2.draw_packman();
+                pacman3.draw_packman();
+                pacman4.draw_packman();
+                imshow("Pacman Game", background.game_map);
             }
         }
         
-	destroyAllWindows();
+	    destroyAllWindows();
         socket_.close();
     }
 
@@ -180,11 +176,11 @@ private:
     int key4 = -99;
 };
 
-int main() {
+int main(int argc, char* argv[]) {
     try {
         boost::asio::io_context ioContext;
-        std::string serverIP = "127.0.0.1";  // 서버 IP를 수정해야 합니다.
-        short serverPort = 2221;            // 서버 포트를 수정해야 합니다.
+        std::string serverIP = argv[1];  // 서버 IP를 수정해야 합니다.
+        short serverPort = atoi(argv[2]);            // 서버 포트를 수정해야 합니다.
 
         Client client(ioContext, serverIP, serverPort);
         client.start();

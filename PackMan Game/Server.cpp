@@ -23,10 +23,7 @@ private:
                           
                 std::thread t(&Server::startReading, this, clients_.back());
                 t.detach();
-
-                
             }
-
             accept();
         });
     }
@@ -42,11 +39,13 @@ private:
                 if (ec == boost::asio::error::eof) {
                     // Client disconnected
                     handleDisconnect(clientSocket);
-                } else if (ec) {
+                } 
+                else if (ec) {
                     std::cerr << "Error reading from client: " << ec.message() << std::endl;
-                } else {
+                } 
+                else {
                 
-                if (clients_.size() == 4 && first_try == false) {
+                    if (clients_.size() == 4 && first_try == false) {
                         additionalAction();
                         loadingbroadcast("Play");
                         first_try = true;
@@ -64,13 +63,13 @@ private:
                     }
                             
                     if (tokens.size() >= 2) {
-                    name = tokens[0];
-                    key = tokens[1];
+                        name = tokens[0];
+                        key = tokens[1];
                         
                         if(name == "username")
                             userlist.push_back(tokens[1]);
         
-                        std::cout << "[name]: [" << name << "]\n[key]: [" << key << "]" << std::endl;
+                        std::cout << "name : " << name << " , key : " << key << std::endl;
                     }
                     
                     for(int i = 0 ; i < userlist.size() ; i++){
@@ -115,10 +114,6 @@ private:
     void broadcast(const std::string& message, std::shared_ptr<ip::tcp::socket> sender) {
         for (const auto& client : clients_) {
             boost::asio::write(*client, boost::asio::buffer(message));
-            // 자기 자신에게 보낸 메시지는 제외하고 전송
-            //if (client != sender) {
-            //    boost::asio::write(*client, boost::asio::buffer(message));
-            //}
         }
     }
 
@@ -138,16 +133,19 @@ private:
     std::string key;
 };
 
-int main() {
+int main(int argc, char* argv[]) {
+
+
     try {
         boost::asio::io_service ioService;
-        Server server(ioService, 2221);
+        Server server(ioService, atoi(argv[1]));
 
         std::thread t([&ioService]() {
             ioService.run();
         });
         t.join();
-    } catch (const std::exception& ex) {
+    } 
+    catch (const std::exception& ex) {
         std::cerr << "Exception: " << ex.what() << std::endl;
     }
 

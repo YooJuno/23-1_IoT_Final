@@ -21,8 +21,8 @@ int main(){
 
     while (true) {
         char key = waitKey(10);
-        //if (key == 'q' || key == 'Q')
-        //    break;
+        if (key == 'q' || key == 'Q')
+           break;
 
         background.draw_background();
         pacman1.draw_packman();
