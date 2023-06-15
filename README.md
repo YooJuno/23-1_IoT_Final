@@ -4,7 +4,7 @@
 
 **21800201 김현욱**
 
-### [주제] : Pac-Man Game
+### [주제] : Multi-ClientPac-Man Game
 
 **구현 환경**
 
