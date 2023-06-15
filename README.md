@@ -263,7 +263,7 @@ $ g++ -std=c++11 Client.cpp -o Client -lboost_system -pthread $(pkg-config --lib
 
 ### Game 실행 방법
 
-##### ./Server <ip_address> `<port>` 순서대로 Command에 작성한다.
+##### ./Server `<port>` 순서대로 Command에 작성한다.
 
 <img width="556" alt="KakaoTalk_20230614_204955234" src="https://github.com/YooJuno/IoT_Final/assets/82189642/e552e56b-32d8-4c8f-9a00-5edb3527e921">
 
