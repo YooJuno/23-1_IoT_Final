@@ -212,7 +212,7 @@ make 명령을 사용하여 컴파일을 시작합니다. 앞에 time을 붙여�
 >
 > ![](https://media.vlpt.us/images/minukiki/post/4ef8927f-9ba7-4190-a8aa-d8181299a937/Screenshot%20from%202022-04-02%2010-20-29.png)
 
-/usr/local/lib이 출력되지 않았다면 다음 명령을 추가로 실행해야합니다. 
+/usr/local/lib이 출력되지 않았다면 다음 명령을 추가로 실행해야합니다.
 
 > ```null
 > $ sudo sh -c 'echo '/usr/local/lib' > /etc/ld.so.conf.d/opencv.conf'
