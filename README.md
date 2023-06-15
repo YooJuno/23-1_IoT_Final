@@ -1,4 +1,4 @@
-# IoT 실습 FInal Project 계획서
+# IoT 실습 FInal Project
 
 **21800471 유준호**
 
@@ -183,9 +183,10 @@ Non free 모듈을 사용하려면 다음 옵션을 추가했습니다.
 
 다음처럼 Python 3 라이브러리 항목이 보이지 않는 경우에는
 
-굵은 글처럼 해당 경로들을 직접 적어줘야 합니다.포스팅에서 사용한 옵션과 차이가 있을 수 있습니다. 
+굵은 글처럼 해당 경로들을 직접 적어줘야 합니다.포스팅에서 사용한 옵션과 차이가 있을 수 있습니다.
 
 위의 cmake 명령어 뒤에 붙혀 쓰면 됩니다.
+
 > **-D PYTHON3_INCLUDE_DIR=/usr/include/python3.8 -D PYTHON3_NUMPY_INCLUDE_DIRS=/usr/lib/python3/dist-packages/numpy/core/include/ -D PYTHON3_PACKAGES_PATH=/usr/lib/python3/dist-packages -D PYTHON3_LIBRARY=/usr/lib/x86_64-linux-gnu/libpython3.8.so ../**
 
 make 명령을 사용하여 컴파일을 시작합니다. 앞에 time을 붙여서 실행하면 컴파일 완료 후 걸린 시간을 알려줍니다.
