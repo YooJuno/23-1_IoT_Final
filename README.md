@@ -34,6 +34,8 @@
 
 ### OPENCV4 설치 방법
 
+출처 : https://github.com/YooJuno/IoT_Final
+
 ## 1. 설치된 OpenCV 제거
 
 전에 설치했던 OpenCV가 있다면 새로 설치하는 OpenCV 4.4.0 버전이 제대로 동작하지 않기 때문에 제거해주어야 합니다.
@@ -54,7 +56,6 @@ $ sudo apt-get purge  libopencv* python-opencv
 $ sudo apt-get autoremove
 ```
 
-
 ## 2. 기존 설치된 패키지 업그레이드
 
 OpenCV 4.4.0을 설치해주기 전에 기존에 설치된 패키지들을 업그레이드 해주기 위한 작업입니다.
@@ -67,7 +68,6 @@ $ sudo apt-get update
 $ sudo apt-get upgrade
 ```
 
-
 ## 3. OpenCV 컴파일 전 필요한 패키지 설치
 
 컴파일 하는데 사용하는 것들이 포함된 패키지들을 설치합니다. 이미 설치된 경우도 있습니다.
@@ -79,7 +79,6 @@ $ sudo apt-get upgrade
 $ sudo apt-get install build-essential cmake
 ```
 
-
 **pkg-config**는 프로그램 컴파일 및 링크시 필요한 라이브러리에 대한 정보를 메타파일(확장자가 .pc 인 파일)로부터 가져오는데 사용됩니다.
 
 터미널에서 특정 라이브러리를 사용한 소스코드를 컴파일시 필요한 헤더파일 및 라이브러리 위치 및 옵션을 추가하는데 도움이 됩니다.
@@ -90,23 +89,17 @@ $ sudo apt-get install pkg-config
 
 ![](https://media.vlpt.us/images/minukiki/post/d81806b1-fe2b-476e-8224-b8b25462cef0/Screenshot%20from%202022-04-02%2009-30-24.png)
 
-
-
 OpenGL 지원하기 위해 필요한 라이브러리입니다.
 
 > ```null
 > $ sudo apt-get install mesa-utils libgl1-mesa-dri libgtkgl2.0-dev libgtkglext1-dev
 > ```
->
-
 
 OpenCV 최적화를 위해 사용되는 라이브러리들입니다.
 
 > ```null
 > $ sudo apt-get install libatlas-base-dev gfortran libeigen3-dev
 > ```
->
-
 
 python3-dev 패키지는 OpenCV-Python 바인딩을 위해 필요한 패키지들입니다.
 
@@ -115,7 +108,6 @@ Numpy는 매트릭스 연산등을 빠르게 처리할 수 있어서 OpenCV에�
 > ```null
 > $ sudo apt-get install python3-dev python3-numpy
 > ```
->
 
 ## 4. OpenCV 설정과 컴파일 및 설치
 
@@ -231,14 +223,8 @@ make 명령을 사용하여 컴파일을 시작합니다. 앞에 time을 붙여�
 > ```null
 > $ sudo ldconfig
 > ```
->
 
 ### BOOST 라이브러리 설치 방법
-
-
-Boost는  C++ 커뮤니티 및 C++ 개발자들이 개발하고 있는 오픈 소스 라이브러리의 집합입니다
-
-2019년 말 기준 최신 boost의 최신 버전은 1.72.0입니다.
 
 다운로드 : [https://www.boost.org/users/download/](https://www.boost.org/users/download/)
 
@@ -247,7 +233,6 @@ Boost는  C++ 커뮤니티 및 C++ 개발자들이 개발하고 있는 오픈 �
 (여기에서는 tar.gz을 기준으로 설명합니다.)
 
 다음 순서대로 진행합니다.
-
 
 $ tar xvfz boost_1_72_0.tar.gz
 
