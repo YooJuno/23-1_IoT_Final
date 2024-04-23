@@ -284,4 +284,5 @@ $ g++ -std=c++11 Client.cpp -o Client -lboost_system -pthread $(pkg-config --lib
 
 # References
 https://velog.io/@minukiki/Ubuntu-20.04%EC%97%90-OpenCV-4.4.0-%EC%84%A4%EC%B9%98
+
 https://yaaam.tistory.com/entry/Ubuntu-Boost-%EC%84%A4%EC%B9%98-Ubuntu-%ED%99%98%EA%B2%BD%EC%97%90%EC%84%9C-Boost-%EC%84%A4%EC%B9%98%EB%B0%A9%EB%B2%95
