@@ -38,8 +38,6 @@ https://youtu.be/2uh6XcFZric
 
 ### OPENCV4 설치 방법
 
-출처 : https://velog.io/@minukiki/Ubuntu-20.04%EC%97%90-OpenCV-4.4.0-%EC%84%A4%EC%B9%98
-
 ## 1. 설치된 OpenCV 제거
 
 전에 설치했던 OpenCV가 있다면 새로 설치하는 OpenCV 4.4.0 버전이 제대로 동작하지 않기 때문에 제거해주어야 합니다.
@@ -231,7 +229,6 @@ make 명령을 사용하여 컴파일을 시작합니다. 앞에 time을 붙여�
 
 ### BOOST 라이브러리 설치 방법
 
-출처 : https://yaaam.tistory.com/entry/Ubuntu-Boost-%EC%84%A4%EC%B9%98-Ubuntu-%ED%99%98%EA%B2%BD%EC%97%90%EC%84%9C-Boost-%EC%84%A4%EC%B9%98%EB%B0%A9%EB%B2%95
 
 다운로드 : [https://www.boost.org/users/download/](https://www.boost.org/users/download/)
 
@@ -284,3 +281,7 @@ $ g++ -std=c++11 Client.cpp -o Client -lboost_system -pthread $(pkg-config --lib
 ##### 4명의 Client가 접속하면 게임이 실행된다.
 
 <img width="378" alt="KakaoTalk_20230614_205204755" src="https://github.com/YooJuno/IoT_Final/assets/82189642/2f4f232c-69c3-4f36-93c2-bfd963854968">
+
+# References
+https://velog.io/@minukiki/Ubuntu-20.04%EC%97%90-OpenCV-4.4.0-%EC%84%A4%EC%B9%98
+https://yaaam.tistory.com/entry/Ubuntu-Boost-%EC%84%A4%EC%B9%98-Ubuntu-%ED%99%98%EA%B2%BD%EC%97%90%EC%84%9C-Boost-%EC%84%A4%EC%B9%98%EB%B0%A9%EB%B2%95
